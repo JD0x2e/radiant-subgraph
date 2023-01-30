@@ -1,0 +1,65 @@
+type Claimed @entity {
+  # Transaction Hash
+  id: ID!
+
+  # Block Number
+  block: BigInt!
+
+  # Timestamp
+  timestamp: BigInt!
+
+  # Sender of token
+  from: String!
+
+  # Receiver of token
+  to: String!
+}
+
+type Swap @entity {
+  # Transaction id
+  id: ID!
+
+  # Address of user
+  account: String!
+
+  # Amount 0 In
+  amount0In: BigInt!
+
+  # Amount 0 Out
+  amount0Out: BigInt!
+
+  # Amount 1 In
+  amount1In: BigInt!
+
+  # Amount 1 Out
+  amount1Out: BigInt!
+
+  # Amount in USD
+  amountUSD: BigDecimal!
+
+  # Address of pair
+  pair: String!
+
+  # Timestamp
+  timestamp: BigInt!
+}
+
+type Transfer @entity {
+  # Transaction id
+  id: ID!
+
+  # Address of user
+  account: String!
+
+  # Amount sent
+  amount: BigInt!
+
+  # Amount in USD
+  amountUSD: BigDecimal!
+
+  # Destination chain
+  dstChainId: BigInt!
+
+  # Timestamp
+  timestamp: BigInt!
+}

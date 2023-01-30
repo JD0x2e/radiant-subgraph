@@ -1,0 +1,111 @@
+specVersion: 0.0.6
+description: Galxe Subgraph for Radiant Capital
+repository: https://github.com/JDoy99/radiant-subgraph
+schema:
+  file: galxeoat.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: Transfer
+    network: bsc
+    source:
+      address: "0xadc466855ebe8d1402c5f7e6706fccc3aedb44a0"
+      abi: GalxeOAT
+      startBlock: 24351851
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      file: Transfer\Transfer.wasm
+      entities:
+        - Transfer
+      abis:
+        - name: GalxeOAT
+          file: Transfer\abis\GalxeOAT.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+  - kind: ethereum/contract
+    name: Pair
+    network: bsc
+    source:
+      address: "0x0eD7e52944161450477ee417DE9Cd3a859b14fD0"
+      abi: PancakePair
+      startBlock: 24099230
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      file: Pair\Pair.wasm
+      entities:
+        - Pair
+        - Token
+      abis:
+        - name: PancakePair
+          file: Pair\abis\PancakePair.json
+        - name: _ERC20
+          file: Pair\abis\Prices\ERC20.json
+        - name: CurvePool
+          file: Pair\abis\Prices\Curve\Pool.json
+        - name: CurveRegistry
+          file: Pair\abis\Prices\Curve\Registry.json
+        - name: CalculationsCurve
+          file: Pair\abis\Prices\Calculations\Curve.json
+        - name: YearnLensContract
+          file: Pair\abis\Prices\YearnLens.json
+        - name: AaveOracleContract
+          file: Pair\abis\Prices\AaveOracle.json
+        - name: CalculationsSushiSwap
+          file: Pair\abis\Prices\Calculations\SushiSwap.json
+        - name: ChainLinkContract
+          file: Pair\abis\Prices\ChainLink.json
+        - name: UniswapRouter
+          file: Pair\abis\Prices\Uniswap\Router.json
+        - name: UniswapFactory
+          file: Pair\abis\Prices\Uniswap\Factory.json
+        - name: UniswapPair
+          file: Pair\abis\Prices\Uniswap\Pair.json
+      eventHandlers:
+        - event: Swap(indexed address,uint256,uint256,uint256,uint256,indexed address)
+          handler: handleSwap
+  - kind: ethereum/contract
+    name: Bridge
+    network: bsc
+    source:
+      address: "0x0eD7e52944161450477ee417DE9Cd3a859b14fD0"
+      abi: RDNTBridge
+      startBlock: 24099230
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      file: Bridge\Bridge.wasm
+      entities:
+        - Transfer
+      abis:
+        - name: RDNTBridge
+          file: Bridge\abis\RDNTBridge.json
+        - name: _ERC20
+          file: Bridge\abis\Prices\ERC20.json
+        - name: CurvePool
+          file: Bridge\abis\Prices\Curve\Pool.json
+        - name: CurveRegistry
+          file: Bridge\abis\Prices\Curve\Registry.json
+        - name: CalculationsCurve
+          file: Bridge\abis\Prices\Calculations\Curve.json
+        - name: YearnLensContract
+          file: Bridge\abis\Prices\YearnLens.json
+        - name: AaveOracleContract
+          file: Bridge\abis\Prices\AaveOracle.json
+        - name: CalculationsSushiSwap
+          file: Bridge\abis\Prices\Calculations\SushiSwap.json
+        - name: ChainLinkContract
+          file: Bridge\abis\Prices\ChainLink.json
+        - name: UniswapRouter
+          file: Bridge\abis\Prices\Uniswap\Router.json
+        - name: UniswapFactory
+          file: Bridge\abis\Prices\Uniswap\Factory.json
+        - name: UniswapPair
+          file: Bridge\abis\Prices\Uniswap\Pair.json
+      eventHandlers:
+        - event: SendToChain(indexed uint16,indexed address,indexed bytes,uint256)
+          handler: handleSendToChain
