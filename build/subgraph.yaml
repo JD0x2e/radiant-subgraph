@@ -78,7 +78,7 @@ dataSources:
       kind: ethereum/events
       apiVersion: 0.0.6
       language: wasm/assemblyscript
-      file: Pair/Pair.wasm
+      file: PairV3/PairV3.wasm
       entities:
         - Pair
         - Token

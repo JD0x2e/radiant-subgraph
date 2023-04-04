@@ -44,32 +44,6 @@ type Swap @entity {
   timestamp: BigInt!
 }
 
-type Swap2 @entity {
-  # Transaction id
-  id: ID!
-
-  # Address of user
-  account: String!
-
-  # Address of recipient
-  recipient: String!
-
-  # Amount 0
-  amount0: BigInt!
-
-  # Amount 1
-  amount1: BigInt!
-
-  # Amount in USD
-  amountUSD: BigDecimal!
-
-  # Address of pair
-  pair: String!
-
-  # Timestamp
-  timestamp: BigInt!
-}
-
 type Transfer @entity {
   # Transaction id
   id: ID!
