@@ -8,9 +8,9 @@ dataSources:
     name: Transfer
     network: bsc
     source:
-      address: "0xadc466855ebe8d1402c5f7e6706fccc3aedb44a0"
+      address: '0xadc466855ebe8d1402c5f7e6706fccc3aedb44a0'
       abi: GalxeOAT
-      startBlock: 24351851
+      startBlock: 27843453
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -28,9 +28,9 @@ dataSources:
     name: Pair
     network: bsc
     source:
-      address: "0x0eD7e52944161450477ee417DE9Cd3a859b14fD0"
+      address: '0x346575fC7f07E6994D76199E41D13dC1575322E1'
       abi: PancakePair
-      startBlock: 24099230
+      startBlock: 26859000
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -78,12 +78,65 @@ dataSources:
         - event: Swap(indexed address,uint256,uint256,uint256,uint256,indexed address)
           handler: handleSwap
   - kind: ethereum/contract
+    name: PairV3
+    network: bsc
+    source:
+      address: '0xb55a0b97b7d9ebe4208b08ab00fec0c419cc32a3'
+      abi: PancakePairV3
+      startBlock: 26859000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      file: ./mappings/swap2.ts
+      entities:
+        - Pair
+        - Token
+      abis:
+        - name: PancakePairV3
+          file: ./abis/PancakePairV3.json
+        ###########################################
+        ############## Price Oracle ###############
+        ###########################################
+        # ERC20
+        - name: _ERC20
+          file: ./abis/Prices/ERC20.json
+        # Curve Contracts
+        - name: CurvePool
+          file: ./abis/Prices/Curve/Pool.json
+        - name: CurveRegistry
+          file: ./abis/Prices/Curve/Registry.json
+        - name: CalculationsCurve
+          file: ./abis/Prices/Calculations/Curve.json
+        # YearnLens Contracts
+        - name: YearnLensContract
+          file: ./abis/Prices/YearnLens.json
+        # Aave Oracle Contract
+        - name: AaveOracleContract
+          file: ./abis/Prices/AaveOracle.json
+        # SushiSwap Contracts
+        - name: CalculationsSushiSwap
+          file: ./abis/Prices/Calculations/SushiSwap.json
+        # ChainLink Contracts
+        - name: ChainLinkContract
+          file: ./abis/Prices/ChainLink.json
+        # Uniswap Contracts
+        - name: UniswapRouter
+          file: ./abis/Prices/Uniswap/Router.json
+        - name: UniswapFactory
+          file: ./abis/Prices/Uniswap/Factory.json
+        - name: UniswapPair
+          file: ./abis/Prices/Uniswap/Pair.json
+      eventHandlers:
+        - event: Swap(indexed address,indexed address,int256,int256,uint160,uint128,int24,uint128,uint128)
+          handler: handleSwapV3
+  - kind: ethereum/contract
     name: Bridge
     network: bsc
     source:
-      address: "0x0eD7e52944161450477ee417DE9Cd3a859b14fD0"
+      address: '0xf7DE7E8A6bd59ED41a4b5fe50278b3B7f31384dF'
       abi: RDNTBridge
-      startBlock: 24099230
+      startBlock: 26836600
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -127,5 +180,7 @@ dataSources:
         - name: UniswapPair
           file: ./abis/Prices/Uniswap/Pair.json
       eventHandlers:
-        - event: SendToChain(indexed uint16,indexed address,indexed bytes,uint256)
+        - event: SendToChain(indexed uint16,indexed address,indexed bytes32,uint256)
           handler: handleSendToChain
+        - event: ReceiveFromChain(indexed uint16,indexed address,uint256)
+          handler: handleReceiveFromChain

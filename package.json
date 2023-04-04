@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "codegen": "graph codegen ./galxeoat.yaml",
-    "deploy": "graph deploy --product hosted-service --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ jdoy99/radiant-bsc ./galxeoat.yaml --access-token",
+    "deploy": "graph deploy --product hosted-service --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ jdoy99/rdnt-bsc ./galxeoat.yaml --access-token",
     "build": "graph build ./galxeoat.yaml"
   },
   "keywords": [],
