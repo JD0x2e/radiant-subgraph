@@ -1,5 +1,5 @@
 import { Swap } from "../generated/PairV3/PancakePairV3"
-import { Swap as SwapSchema } from "../generated/schema"
+import { Swap2 as SwapSchema } from "../generated/schema"
 import { getUsdPricePerToken } from "./prices/index"
 import { Address } from "@graphprotocol/graph-ts"
 import { BigDecimal } from "@graphprotocol/graph-ts"
@@ -28,10 +28,8 @@ export function handleSwapV3(event: Swap): void {
   swap.pair = event.address.toHexString()
   swap.timestamp = event.block.timestamp
   swap.account = event.params.sender.toHexString()
-  swap.amount0In = event.params.amount0
-  swap.amount0Out = event.params.amount0
-  swap.amount1In = event.params.amount1
-  swap.amount1Out = event.params.amount1
+  swap.amount0 = event.params.amount0
+  swap.amount1 = event.params.amount1
   let tokenPrice: BigDecimal
   let fetchPrice = getUsdPricePerToken(RDNTToken)
 
