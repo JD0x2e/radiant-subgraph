@@ -5,26 +5,6 @@ schema:
   file: ./galxeoat.graphql
 dataSources:
   - kind: ethereum/contract
-    name: Transfer
-    network: bsc
-    source:
-      address: '0xadc466855ebe8d1402c5f7e6706fccc3aedb44a0'
-      abi: GalxeOAT
-      startBlock: 27843453
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.6
-      language: wasm/assemblyscript
-      file: ./mappings/transfer.ts
-      entities:
-        - Transfer
-      abis:
-        - name: GalxeOAT
-          file: ./abis/GalxeOAT.json
-      eventHandlers:
-        - event: Transfer(indexed address,indexed address,indexed uint256)
-          handler: handleTransfer
-  - kind: ethereum/contract
     name: Pair
     network: bsc
     source:

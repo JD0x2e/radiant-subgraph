@@ -1,20 +1,3 @@
-type Claimed @entity {
-  # Transaction Hash
-  id: ID!
-
-  # Block Number
-  block: BigInt!
-
-  # Timestamp
-  timestamp: BigInt!
-
-  # Sender of token
-  from: String!
-
-  # Receiver of token
-  to: String!
-}
-
 type Swap @entity {
   # Transaction id
   id: ID!
