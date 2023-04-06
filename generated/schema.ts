@@ -214,13 +214,13 @@ export class Swap2 extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get account(): string {
-    let value = this.get("account");
+  get sender(): string {
+    let value = this.get("sender");
     return value!.toString();
   }
 
-  set account(value: string) {
-    this.set("account", Value.fromString(value));
+  set sender(value: string) {
+    this.set("sender", Value.fromString(value));
   }
 
   get recipient(): string {
@@ -250,22 +250,49 @@ export class Swap2 extends Entity {
     this.set("amount1", Value.fromBigInt(value));
   }
 
-  get amountUSD(): BigDecimal {
-    let value = this.get("amountUSD");
-    return value!.toBigDecimal();
+  get sqrtPriceX96(): BigInt {
+    let value = this.get("sqrtPriceX96");
+    return value!.toBigInt();
   }
 
-  set amountUSD(value: BigDecimal) {
-    this.set("amountUSD", Value.fromBigDecimal(value));
+  set sqrtPriceX96(value: BigInt) {
+    this.set("sqrtPriceX96", Value.fromBigInt(value));
   }
 
-  get pair(): string {
-    let value = this.get("pair");
-    return value!.toString();
+  get liquidity(): BigInt {
+    let value = this.get("liquidity");
+    return value!.toBigInt();
   }
 
-  set pair(value: string) {
-    this.set("pair", Value.fromString(value));
+  set liquidity(value: BigInt) {
+    this.set("liquidity", Value.fromBigInt(value));
+  }
+
+  get tick(): i32 {
+    let value = this.get("tick");
+    return value!.toI32();
+  }
+
+  set tick(value: i32) {
+    this.set("tick", Value.fromI32(value));
+  }
+
+  get protocolFeesToken0(): BigInt {
+    let value = this.get("protocolFeesToken0");
+    return value!.toBigInt();
+  }
+
+  set protocolFeesToken0(value: BigInt) {
+    this.set("protocolFeesToken0", Value.fromBigInt(value));
+  }
+
+  get protocolFeesToken1(): BigInt {
+    let value = this.get("protocolFeesToken1");
+    return value!.toBigInt();
+  }
+
+  set protocolFeesToken1(value: BigInt) {
+    this.set("protocolFeesToken1", Value.fromBigInt(value));
   }
 
   get timestamp(): BigInt {
